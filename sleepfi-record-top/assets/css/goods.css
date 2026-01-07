@@ -1,0 +1,287 @@
+@charset "utf-8";
+
+/*----------------------------------------------------------------
+    space (gapはframeで設定)
+-----------------------------------------------------------------*/
+:root {
+    --space-secBtm: 9rem;
+    --space-jukesubbarBtm: 3rem;
+    --space-cardInline: 2rem;
+    --space-cardBlock: 1rem;
+    
+}
+[data-space="secBtm"] {
+    margin-bottom: var(--space-secBtm);
+}
+[data-space="jukesubbarBtm"] {
+    margin-bottom: var(--space-jukesubbarBtm);
+}
+[data-space="goodsCard"] {
+    padding: var(--space-cardBlock) var(--space-cardInline);
+}
+
+
+
+/*----------------------------------------------------------------
+    layout frame
+-----------------------------------------------------------------*/
+:root {
+    --gap-section: 3rem;
+    --gap-goodsWrapper: 2rem;
+    --gap-goodsCell: 9rem;
+    --gap-goodsCard: 2rem;
+    
+}
+[data-frame="Section"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-section);
+}
+[data-frame="goodsWrapper"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-goodsWrapper);   
+
+}
+[data-frame="goodsCell"] {
+    display: flex;
+    gap: var(--gap-goodsCell);
+    align-items: flex-start;
+    
+}
+[data-frame="goodsCard"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-goodsCard);
+    cursor: pointer;
+    
+}
+[data-frame="goodsCard"]:hover {
+   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+  opacity: .85;
+  transition: .2s ease;
+}
+
+
+
+[data-frame="goodsCard"].playing {
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: 0.4s ease;
+  box-shadow: 0 0 12px rgba(0,255,180,0.45);
+  animation: pulse 2s infinite alternate ease-in-out;
+}
+
+
+/* アニメーション */
+@keyframes pulse {
+  0% {  opacity: .2; }
+
+  100% {  opacity: 1; }
+}
+  
+
+/*----------------------------------------------------------------
+    parts
+-----------------------------------------------------------------*/
+
+[data-img="jukesubbarImg"] {
+    max-width: 604px;
+    height: auto;
+    object-fit: contain;
+}
+
+[data-img="goodsImg"] {
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+[data-textArea="cardText"] {
+    max-width: 300px;
+    text-align: left;
+    
+}
+
+.test-goodsimg {
+    width: 300px;
+    height: 300px;
+    background-color: rgb(94, 94, 94);
+}
+.jukesubbarImg {
+    width: 604px;
+    height: 121px;
+    background-color: rgb(94, 94, 94);
+}
+
+/* Jukebox Base */
+#jukebox {
+  position: sticky;
+  top: 86px;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  background: rgba(10, 10, 10, 0.9);
+  padding: 1rem 1.4rem;
+  border-radius: 6px;
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  
+}
+
+/* CD 回転演出 */
+.player-cover {
+  width: 60px;
+  
+  border-radius: 50%;
+  
+  background-color: #fafafa;
+  animation: rotateCD 4s linear infinite;
+  animation-play-state: paused;
+}
+.player-cover img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes rotateCD {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+#jukebox.playing .player-cover {
+  animation-play-state: running;
+}
+
+/* テキスト */
+.player-info p {
+  color: #fafafa;
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+.player-info { 
+  width: 100%;
+  overflow: hidden;
+}
+
+.ticker {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker__inner {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: scroll 14s linear infinite;
+  animation-play-state: paused; /* ← 最初停止 */
+}
+
+.ticker__inner span {
+  font-size: 1rem;
+  color: #fafafa;
+  opacity: .85;
+  letter-spacing: 0.05em;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+
+/* ボタン */
+.player-btn {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fafafa;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  transform-origin: center;
+}
+
+/* 再生中脈動 */
+#jukebox.playing .player-btn {
+  animation: pulseBtn 1.5s infinite;
+}
+@keyframes pulseBtn {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+/* ドロワー開いたらジュークボックス非表示 */
+#sp-nav[data-status="open"] ~ main #jukebox {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+/* 閉じたら戻る */
+#sp-nav[data-status="close"] ~ main #jukebox {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+@media (max-width: 770px) {
+
+  :root {
+    --gap-section: 4rem;
+    --gap-goodsWrapper: 3.5rem;
+    --gap-goodsCell: 3rem;
+    --gap-goodsCard: 1.5rem;
+
+    --space-secBtm: 6rem;
+    --space-jukesubbarBtm: 2.5rem;
+
+    --space-cardInline: 1rem;
+    --space-cardBlock: 1.5rem;
+  }
+
+  /* セル（2カラム → 1カラム） */
+  [data-frame="goodsCell"] {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: var(--gap-goodsCell);
+  }
+
+  /* カード幅調整（中央寄せ） */
+  [data-frame="goodsCard"] {
+    width: 100%;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+
+  [data-frame="goodsCard"] img,
+  [data-img="goodsImg"] {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* テキストエリアも画像幅に追従 */
+  [data-textArea="cardText"] {
+    max-width: 100%;
+    
+  }
+
+  /* Jukeboxサブバー中央寄せ */
+  [data-img="jukesubbarImg"] {
+    max-width: 85vw;
+    margin-inline: auto;
+    display: block;
+  }
+    #jukebox {
+    justify-content: space-between;
+    top: 43.59px;
+  }
+  .player-cover {
+    width: 50px;
+    
+  }
+}
+

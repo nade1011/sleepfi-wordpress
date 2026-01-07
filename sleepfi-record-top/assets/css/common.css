@@ -1,0 +1,286 @@
+@charset "utf-8";
+
+
+/*-------------ベース設定・レイアウトや枠系---------------------------------*/
+
+/*----------------------------------------------------------------
+    base
+-----------------------------------------------------------------*/
+:root {
+    --content-max-width: 1200px;
+}
+[data-base="content"] {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+
+
+/*----------------------------------------------------------------
+    space (gapはframeで設定)
+-----------------------------------------------------------------*/
+:root {
+    --space-LR: 6.25rem;
+    --space-footer-bottom: 3rem;
+    --space-header-block: 1.75rem;
+
+
+}
+[data-space="wrapperLR"] {
+    padding-inline: var(--space-LR);
+}
+[data-space="header"] {
+    margin-block: var(--space-header-block);
+}
+
+[data-space="footerBottom"] {
+    padding-bottom: var(--space-footer-bottom);
+}
+
+
+/*----------------------------------------------------------------
+    layout frame
+-----------------------------------------------------------------*/
+:root {
+    /*-------------
+        top
+     ------------*/   
+    /*flex*/
+    --display-flex: flex;
+    --flex-column: column;
+    /*gap*/
+    --gap-nav: 2rem;
+    --gap-footer-nav: 2rem;
+    
+}
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+}
+[data-frame="header"] {
+    display: var(--display-flex);
+    justify-content: space-between;
+    align-items: flex-end;
+    
+}
+[data-frame="nav"] {
+    display: var(--display-flex);
+    gap: var(--gap-nav);
+    z-index: 10;
+}
+[data-frame="nav"] li a:hover {
+    opacity: 0.6;
+}
+[data-frame="sp-nav-header"] {
+     display: flex;
+     justify-content: center;
+     gap: 4rem;
+     width: 100%;
+     
+}
+[data-frame="sp-nav"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding-top: 3rem;
+    font-size: 36px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FEFFFF;
+    z-index: 10000;
+    transform: translateX(100%);
+}
+[data-frame="sp-ul"] {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+[data-frame="sp-ul"] li a:hover {
+    opacity: 0.6;
+}
+
+
+[data-frame="footer"] {
+    display: var(--display-flex);
+    flex-direction: var(--flex-column);
+    align-items: center;
+    gap: var(--gap-footer-nav);
+    
+}
+/*----------------------------------------------------------------
+    parts
+-----------------------------------------------------------------*/
+
+[data-btn="goodsBtn"] {
+    padding: 1.125rem 2.5rem;
+}
+[data-img="logo"] {
+    max-width: 217px;
+    height: auto;
+    object-fit: contain;
+}
+.open-btn {
+    display: none;
+}
+
+/*--------------------------------------------------------------
+    status
+---------------------------------------------------------------*/
+
+[data-status="open"] {
+    transform: translateX(0%);
+}
+body[data-menu="open"] #jukebox {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/*-------------デザイン系---------------------------------*/
+
+/*----------------------------------------------------------------
+    テキスト
+-----------------------------------------------------------------*/
+:root {
+    /*fontfamily*/
+    /* League Gothic → 代替：Impact → Franklin Gothic → system */
+    --font-league: "League Gothic", "Impact", "Franklin Gothic Medium",
+                    "Arial Narrow", Arial, sans-serif;
+
+    /* Carrois Gothic → 代替：Inter → Helvetica系 */
+    --font-carrois: "Carrois Gothic", "Inter", "Helvetica Neue",
+                    Helvetica, Arial, sans-serif;
+
+    /* Gothic A1 → 代替：Noto Sans JP → system sans */
+    --font-gothic-a1: "Gothic A1", "Noto Sans JP", "Helvetica Neue",
+                        Helvetica, Arial, sans-serif;
+    /*font size*/
+    --font-sz-secHead: 2.5rem;
+    --font-sz-navHeader: 1.5rem;
+    --font-sz-navFooter: 1rem;
+    --font-sz-itemHead: 1.5rem;
+    --font-sz-itemBody: 1rem;
+    --font-sz-day: 0.875rem;
+    --font-sz-btn: 2rem;
+    --font-sz-cpr: 0.875rem;
+
+    /*letter-spacing*/
+    --font-ls-secHead: 0.16em;
+    --font-ls-nav: 0.27em;
+}
+nav ul li {
+    font-family: var(--font-league);
+}
+#header-nav {
+    font-size: var(--font-sz-navHeader);
+}
+#footer-nav {
+    font-size: var(--font-sz-navFooter);
+}
+
+
+section h2 {
+    font-family: var(--font-league);
+    font-size: var(--font-sz-secHead);
+}
+
+small {
+    font-size: var(--font-sz-cpr);
+    font-family: var(--font-carrois);
+}
+
+  /*----------------------------------------------------------------
+    color
+-----------------------------------------------------------------*/
+:root {
+    --color-bgMain:  #FEFFFF;
+    --color-headerBg: #FEFFFF;
+    --color-btn: #000000;
+    --color-btnText: #fff;
+
+}
+body {
+    background-color: var(--color-bgMain);
+}
+header,
+footer {
+    background-color: var(--color-headerBg);
+}
+
+
+
+
+  /*----------------------------------------------------------------
+    sp レスポンシブ
+-----------------------------------------------------------------*/
+
+@media (max-width: 770px) {
+
+    /*----------------------------------------------------------------
+    space (gapはframeで設定)
+-----------------------------------------------------------------*/
+:root {
+    --space-LR: 1.875rem;
+    --space-footer-bottom: 1.5rem;
+    --space-header-block: 1.5rem;
+
+
+}
+[data-space="wrapperLR"] {
+    padding-inline: var(--space-LR);
+}
+[data-space="header"] {
+    margin-block: var(--space-header-block);
+}
+
+[data-space="footerBottom"] {
+    padding-bottom: var(--space-footer-bottom);
+}
+
+/*----------------------------------------------------------------
+    layout frame
+-----------------------------------------------------------------*/
+[data-frame="nav"] {
+    display: none;
+   
+}
+
+
+[data-img="logo"] {
+    max-width: 110px;
+    height: auto;
+    object-fit: contain;
+}
+
+.test-logoimg {
+    width: 110px;
+    height: 48px;
+    background-color: rgb(94, 94, 94);
+}
+/*---------------------------------------------------------------------
+　　パーツ
+---------------------------------------------------------------------*/
+.open-btn {
+    display: block;
+    width: 60px;
+    height: 35px;
+}
+.line {
+    display: block;
+     width: 100%;
+    height: 3px;
+    background: #000;
+    border-bottom: 1px solid #fff;
+    margin-block: 2px;
+   
+}
+
+
+}

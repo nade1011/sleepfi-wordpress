@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+/*----------------------------------------------------------------
+    space (gapはframeで設定)
+-----------------------------------------------------------------*/
+:root {
+  --space-secBtm: 9rem;
+  --space-text: 2rem;
+
+}
+[data-space="secBtm"] {
+    margin-bottom: var(--space-secBtm);
+}
+
+
+/*----------------------------------------------------------------
+    layout frame
+-----------------------------------------------------------------*/
+:root {
+    --gap-section: 6.5rem;
+    --gap-artistWrapper: 12rem;
+    --gap-artistCard: 6.25rem;
+    
+}
+[data-frame="Section"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-section);
+}
+[data-frame="artistWrapper"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-artistWrapper);   
+
+}
+[data-frame="artistCard"] {
+    display: flex;
+    gap: var(--gap-artistCard);
+    align-items: center;
+    
+}
+[data-frame="artistCard"] h3 {
+     margin-bottom: var(--space-text);
+}
+
+
+  
+
+/*----------------------------------------------------------------
+    parts
+-----------------------------------------------------------------*/
+[data-btn="goodsBtn"] {
+    padding: 1.125rem 2.5rem;
+}
+
+
+[data-img="artistImg"] {
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+
+.test-artistimg {
+    width: 300px;
+    height: 300px;
+    background-color: rgb(94, 94, 94);
+}
+
+
+
+   
+/*----------------------------------------------------------------
+    Sp
+-----------------------------------------------------------------*/
+   
+
+@media (max-width: 770px) {
+
+    /* section 下余白をSP用に縮小 */
+    :root {
+        --space-secBtm: 3.5rem; /* ← 9rem → 3.5rem に変更 */
+        --gap-section: 3.5rem;  /* ← 6.5rem → 3.5rem に変更 */
+        --gap-artistWrapper: 4rem; /* ← 12rem → 4rem に変更 */
+        --gap-artistCard: 2rem;    /* ← 6.25rem → 2rem に変更 */
+    }
+
+    /* セクション全体の幅・位置調整 */
+    #artist [data-frame="Section"] {
+        align-items: stretch; /* 中央寄せ → 幅いっぱいに */
+    }
+
+    /* アーティスト一覧の縦の間隔をSP用に */
+    #artist [data-frame="artistWrapper"] {
+        gap: var(--gap-artistWrapper);
+    }
+
+    /* カードを「画像→テキスト」の縦積みに */
+    #artist [data-frame="artistCard"] {
+        flex-direction: column;  /* ← row → column に変更 */
+        align-items: flex-start; /* 画像＋テキストを左揃えに */
+        gap: var(--gap-artistCard);
+    }
+
+    /* 画像エリア：SPでも見やすく */
+    #artist [data-img="artistImg"] {
+        max-width: 100%;     /* 親幅までOK（ただし中身で制御） */
+    }
+    #artist .test-artistimg {
+        width: 100%;         /* 幅いっぱいに広げつつ */
+           /* 300px以上には拡大しない（荒れ防止） */
+            
+    }
+
+    /* テキスト可読性UP */
+    #artist p {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+    }
+}

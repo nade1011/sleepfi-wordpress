@@ -1,0 +1,147 @@
+@charset "utf-8";
+
+/*----------------------------------------------------------------
+    space (gapはframeで設定)
+-----------------------------------------------------------------*/
+:root {
+    --space-readHead-btm: 9rem;
+    --space-secBtm: 9rem;
+    --space-text: 2rem;
+}
+[data-space="readHead-btm"] {
+    padding-bottom: var(--space-readHead-btm);
+}
+[data-space="secBtm"] {
+    margin-bottom: var(--space-secBtm);
+}
+.text-btm-2rem {
+    margin-bottom: var(--space-text);
+}
+
+/*----------------------------------------------------------------
+    layout frame
+-----------------------------------------------------------------*/
+:root {
+    --gap-readWrappe: 2rem;
+    --gap-companyWrapper: 9rem;
+}
+[data-frame="readSec"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+[data-frame="readWrapper"] {
+    display: flex;
+    gap: var(--gap-readWrappe);
+    align-items: center;
+    
+}
+[data-frame="companyWrapper"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-companyWrapper);
+    align-items: center;
+
+}
+
+
+  
+
+/*----------------------------------------------------------------
+    parts
+-----------------------------------------------------------------*/
+[data-img="readImg"] {
+    max-width: 405px;
+    height: auto;
+    object-fit: contain;
+}
+[data-img="companyImg"] {
+    max-width: 1000px;
+    height: auto;
+    object-fit: contain;
+}
+.testImg-read {
+    width: 405px;
+    height: 275px;
+    background-color: rgb(94, 94, 94);
+}
+.testImg-company {
+    width: 1000px;
+    height: 275px;
+    background-color: rgb(94, 94, 94);
+}
+
+
+
+
+/*----------------------------------------------------------------
+    responsive
+-----------------------------------------------------------------*/
+
+  
+@media (max-width: 770px) {
+
+    /* ▼ ABOUT セクション余白（独立管理） */
+    #about [data-space="readHead-btm"] {
+        padding-bottom: 3.5rem; /* PCより縮小 */
+    }
+    #about [data-space="secBtm"] {
+        margin-bottom: 3.5rem; /* PCより縮小 */
+    }
+
+    /* ▼ ABOUT 読みセクション レイアウト縦積み */
+    #about [data-frame="readWrapper"] {
+        display: flex; /* 競合対策 */
+        flex-direction: column; /* ←SP縦積み */
+        align-items: center;
+        text-align: left;
+        gap: 2rem;
+    }
+
+    /* ▼ ABOUT 読み画像：SP 全幅表示 */
+    #about [data-img="readImg"] {
+        width: 100%;
+        max-width: 405px;
+        
+    }
+    #about .testImg-read {
+        width: 100%;
+        
+    }
+
+    /* ▼ 会社情報エリア縦積み調整 */
+    #about [data-frame="companyWrapper"] {
+        display: flex; /* 確実に維持 */
+        flex-direction: column;
+        gap: 2.5rem;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* ▼ COMPANY画像：SP全幅表示 */
+    #about [data-img="companyImg"] {
+        width: 100%;
+        
+        max-width: 1000px;
+    }
+    #about .testImg-company {
+        width: 100%;
+        
+    }
+
+    /* ▼ テキスト可読性UP */
+    #about p {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+    }
+
+    /* ▼ COMPANY画像の中央寄せ解除（デザイン維持） */
+    #about [data-img="companyImg"] {
+        margin-inline: 0;
+    }
+}
+   
+
+   
+
+
