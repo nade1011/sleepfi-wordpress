@@ -38,16 +38,11 @@
     align-items: center;
     gap: var(--gap-section);
 }
-[data-frame="goodsWrapper"] {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-goodsWrapper);   
 
-}
 [data-frame="goodsCell"] {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
     gap: var(--gap-goodsCell);
-    align-items: flex-start;
     
 }
 [data-frame="goodsCard"] {
@@ -104,16 +99,7 @@
     
 }
 
-.test-goodsimg {
-    width: 300px;
-    height: 300px;
-    background-color: rgb(94, 94, 94);
-}
-.jukesubbarImg {
-    width: 604px;
-    height: 121px;
-    background-color: rgb(94, 94, 94);
-}
+
 
 /* Jukebox Base */
 #jukebox {
@@ -244,11 +230,11 @@
 
   /* セル（2カラム → 1カラム） */
   [data-frame="goodsCell"] {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: var(--gap-goodsCell);
-  }
+    
+}
 
   /* カード幅調整（中央寄せ） */
   [data-frame="goodsCard"] {

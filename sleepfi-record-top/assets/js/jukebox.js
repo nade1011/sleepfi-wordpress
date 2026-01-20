@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.src = audioSrc;
       audio.play();
 
-      const artist = card.querySelector("h3:nth-of-type(1)")?.textContent || "";
-      const title = card.querySelector("h3:nth-of-type(2)")?.textContent || "";
-      console.log("DEBUG →", artist, title); // ← 追加
+      const artist = card.dataset.artist || "";
+      const title  = card.dataset.title  || "";
+      console.log("DEBUG →", artist, title);
 
       trackArtist.textContent = artist;
       trackTitle.textContent = title;

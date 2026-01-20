@@ -25,50 +25,41 @@
                 </div>
                 <!-- ▲ Jukebox Player -->
                 
+                <!-- ▼ Goods カスタム投稿 -->
                 <div data-frame="goodsCell">
+                    <?php
+                        $goods_query = new WP_Query([
+                            'post_type' => 'goods',
+                            'posts_per_page' => -1,
+                        ]);
+                        
+                        if($goods_query->have_posts()) :
+                            while($goods_query->have_posts()) : $goods_query->the_post();
+                    ?>
+
                     <article>
-                        <div data-frame="goodsCard" data-space="goodsCard" data-audio="<?php echo get_template_directory_uri(); ?>/assets/audio/sora_no1.mp3">
-                            <p data-img="goodsImg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/slow_bloom.jpg" alt=" Slow Bloomジャケット写真" width="300" height="300"></p>
-                            <h3>Sora.</h3>
-                            <h3> Slow Bloom（Digital Single）</h3>
-                            <p data-textArea="cardText">空気がふわっと広がるような、チルでミニマルな1曲。 朝に合うローファイ・ビート。</p>
+                        <div data-frame="goodsCard"
+                         data-space="goodsCard" 
+                         data-audio="<?php echo esc_attr(get_post_meta(get_the_ID(), 'audio_url', true)); ?>"
+                         data-artist="<?php echo esc_attr(get_post_meta(get_the_ID(), 'artist', true)); ?>"
+                         data-title="<?php echo esc_attr(get_post_meta(get_the_ID(), 'title', true)); ?>" 
+                         >
+                            <p data-img="goodsImg">
+                                <?php the_post_thumbnail('medium'); ?>
+                            </p>
+                            <h3><?php echo esc_html(get_post_meta(get_the_ID(), 'artist', true)); ?></h3>
+                            <h3><?php echo esc_html(get_post_meta(get_the_ID(), 'title', true)); ?></h3>
+                            <p data-textArea="cardText"><?php echo nl2br(esc_html(get_post_meta(get_the_ID(), 'description', true))); ?></p>
                             <p>クリックで視聴 &#9850;</p>
-                            <p>価格：¥250</p>
-                            
+                            <p>価格：￥<?php echo esc_html(get_post_meta(get_the_ID(), 'price', true)); ?></p>
                         </div>
                     </article>
-                     <article>
-                        <div data-frame="goodsCard" data-space="goodsCard" data-audio="<?php echo get_template_directory_uri(); ?>/assets/audio/lune_no1.mp3">
-                            <p data-img="goodsImg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/night_drift.jpg" alt="Night Driftジャケット写真" width="300" height="300"></p>
-                            <h3>Lune</h3>
-                            <h3>Night Drift（Digital EP）</h3>
-                            <p data-textArea="cardText">夜の静けさをそのまま録音したような、やわらかい4曲。 ゆっくり漂うムードが特徴のレーベル定番EP。</p>
-                            <p>クリックで視聴 &#9850;</p>
-                            <p>価格：¥600</p>
-                        </div>
-                    </article>
-                </div>
-                <div data-frame="goodsCell">
-                    <article>
-                        <div data-frame="goodsCard" data-space="goodsCard" data-audio="<?php echo get_template_directory_uri(); ?>/assets/audio/lune_no2.mp3">
-                            <p data-img="goodsImg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/goods/quiethour_goods.jpg" alt="“Quiet Hour”のジャケット写真" width="300" height="300"></p>
-                            <h3>Lune</h3>
-                            <h3> “Quiet Hour” （Digital Single）</h3>
-                            <p data-textArea="cardText">夜更けに寄り添う、静かで淡いローファイビート。 読書や作業に合う作品。</p>
-                            <p>クリックで視聴 &#9850;</p>
-                            <p>価格：¥250</p>
-                        </div>
-                    </article>
-                     <article>
-                        <div data-frame="goodsCard" data-space="goodsCard" data-audio="<?php echo get_template_directory_uri(); ?>/assets/audio/sora_no2.mp3">
-                            <p data-img="goodsImg"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/goods/bluewindow_goods.jpg" alt="“Blue Window”のジャケット写真" width="300" height="300"></p>
-                            <h3>sora.</h3>
-                            <h3>“Blue Window” （Digital Single）</h3>
-                            <p data-textArea="cardText">雨粒のリズムをモチーフにした、やわらかな1曲。 透明感のあるピアノとチルビートが心地よく揺れる。</p>
-                            <p>クリックで視聴 &#9850;</p>
-                            <p>価格：¥250</p>
-                        </div>
-                    </article>
+                    
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
                 </div>
             </section>
              
